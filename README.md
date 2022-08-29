@@ -20,6 +20,12 @@ composer require bambanetlms/library:*
 php artisan admin:import library
 ```
 
+```shell
+php artisan migrate
+```
+
+
+
 License
 ------------
 Licensed under [The MIT License (MIT)](LICENSE).
