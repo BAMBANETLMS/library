@@ -17,6 +17,11 @@ class LibraryServiceProvider extends ServiceProvider
             require __DIR__ . '/Helper/helper.php';
         }
 
+        if ($this->app->runningInConsole()) {
+            // 数据库迁移
+            $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        }
+
         /**if ($views = $extension->views()) {
             $this->loadViewsFrom($views, 'library');
         }

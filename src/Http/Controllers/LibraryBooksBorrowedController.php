@@ -40,7 +40,7 @@ class LibraryBooksBorrowedController extends AdminController
         $grid->model()->latest();
         $grid->column('id', __('Action'))->display(function($id){
             if($this->status != 1){
-                return '<form method="POST" action="'.route('admin.library.returnbooks').'">
+                return '<form method="POST" action="'.url('/admin/alllibrarybooks/returnbook').'">
                     <input type="hidden"  name="_token" value="'.csrf_token().'">
                     <input type="hidden"  name="id" value="'.$id.'">
                     <button class="btn btn-sm btn-primary returned-book" type="submit" data-id="'.$this->id.'">Return</button>

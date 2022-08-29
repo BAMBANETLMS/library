@@ -5,6 +5,7 @@ use Encore\Admin\Admin;
 use BambanetLms\Library\Http\Controllers\LibraryBookCategoryController;
 use BambanetLms\Library\Http\Controllers\LibraryBooksController;
 use BambanetLms\Library\Http\Controllers\LibraryBooksBorrowedController;
+use BambanetLms\Library\Http\Controllers\CustomLibraryController;
 
 trait BootExtension 
 {
@@ -26,7 +27,7 @@ trait BootExtension
             //Borrowed Books
             $router->resource('library-books-borroweds', LibraryBooksBorrowedController::class);
             //Bambanet Post Mark Book Returned
-            $router->post('/alllibrarybooks/returnbook', 'HomeController@returnBooks')->name('library.returnbooks');
+            $router->post('/alllibrarybooks/returnbook',[CustomLibraryController::class,'returnBooks'])->name('library.returnbooks');
             
         });
     }
