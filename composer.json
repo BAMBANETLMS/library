@@ -1,0 +1,33 @@
+{
+    "name": "bambanetlms/library",
+    "description": "Library Module For BambanetLms",
+    "type": "library",
+    "keywords": ["laravel-admin", "extension"],
+    "homepage": "https://github.com/bambanetlms/library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Heinrich Smith Ondeyo",
+            "email": "smithheinrich254@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "encore/laravel-admin": "~1.6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "BambanetLms\\Library\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "BambanetLms\\Library\\LibraryServiceProvider"
+            ]
+        }
+    }
+}
