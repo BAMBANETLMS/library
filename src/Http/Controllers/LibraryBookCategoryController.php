@@ -8,6 +8,7 @@ use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
 use Encore\Admin\Facades\Admin;
+use BambanetLms\Library\Actions\RestoreDeleted;
 
 class LibraryBookCategoryController extends AdminController
 {
@@ -39,10 +40,15 @@ class LibraryBookCategoryController extends AdminController
         }
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-         $grid->actions(function ($actions) {
-            $actions->disableDelete();
+        $grid->filter(function($filter) {
+            $filter->scope('trashed', 'Recycle Bin')->onlyTrashed();
+        });
+        $grid->batchActions(function ($batch) {
+            //$actions->disableDelete();
             //$actions->disableEdit();
-
+            if (isset($_GET['_scope_']) and $_GET['_scope_'] == 'trashed') {
+                $batch->add(new RestoreDeleted());
+            }
         });
 
         return $grid;

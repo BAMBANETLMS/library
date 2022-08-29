@@ -13,7 +13,7 @@ use BambanetLms\Library\Models\LibraryBooks;
 use BambanetLms\Library\Models\BamBookCategory;
 use App\Models\BamAcademicTeachers;
 use Encore\Admin\Facades\Admin;
-
+use BambanetLms\Library\Actions\RestoreDeleted;
 
 class LibraryBooksBorrowedController extends AdminController
 {
@@ -81,10 +81,16 @@ class LibraryBooksBorrowedController extends AdminController
 
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-         $grid->actions(function ($actions) {
-            $actions->disableDelete();
+       
+        $grid->filter(function($filter) {
+            $filter->scope('trashed', 'Recycle Bin')->onlyTrashed();
+        });
+        $grid->batchActions(function ($batch) {
+            //$actions->disableDelete();
             //$actions->disableEdit();
-
+            if (isset($_GET['_scope_']) and $_GET['_scope_'] == 'trashed') {
+                $batch->add(new RestoreDeleted());
+            }
         });
         return $grid;
     }
